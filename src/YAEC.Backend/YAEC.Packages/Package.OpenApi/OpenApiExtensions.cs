@@ -10,14 +10,14 @@ namespace Package.OpenApi;
 
 public static class OpenApiExtensions
 {
-    public static void AddCoreOpenApi(this IServiceCollection services, Assembly assembly)
+    public static void AddOpenApi(this IServiceCollection services, Assembly assembly)
     {
         services.AddEndpointsApiExplorer();
         services.AddCoreMinimalApis(assembly);
         services.AddCoreSwagger(assembly.GetName().Name!);
     }
 
-    public static void UseCoreOpenApi(this WebApplication app, ApiVersionSet? apiVersionSet = null)
+    public static void UseOpenApi(this WebApplication app, ApiVersionSet? apiVersionSet = null)
     {
         apiVersionSet ??= app.NewApiVersionSet()
             .HasApiVersion(new ApiVersion(1))
