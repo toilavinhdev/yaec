@@ -4,6 +4,14 @@ volumes:
   minio-data: {}
 
 services:
+  
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  
   minio:
     container_name: minio
     image: quay.io/minio/minio

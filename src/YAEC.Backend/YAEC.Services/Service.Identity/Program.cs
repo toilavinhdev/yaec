@@ -1,4 +1,5 @@
 using Package.Logger;
+using Package.Observability;
 using Package.OpenApi;
 using Package.Shared.Extensions;
 using Package.Shared.Mediator;
@@ -11,8 +12,10 @@ services.AddHttpContextAccessor();
 services.AddCoreCors();
 services.AddOpenApi(typeof(Program).Assembly);
 services.AddCoreMediator(typeof(Program).Assembly);
+services.AddObservability();
 
 var app = builder.Build();
+app.UseObservability();
 app.UseCoreExceptionHandler();
 app.UseCors(CorsExtensions.AllowAll);
 app.UseOpenApi();
