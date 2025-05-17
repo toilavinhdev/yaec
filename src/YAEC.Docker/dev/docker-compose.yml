@@ -1,11 +1,29 @@
 version: "3.8"
 
 volumes:
+  redis-data: {}
+  redisinsight-data: {}
   minio-data: {}
 
 services:
+  redis:
+    container_name: ${COMPOSE_PROJECT_NAME}-redis
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+        
+  redisinsight:
+    container_name: ${COMPOSE_PROJECT_NAME}-redisinsight
+    image: redis/redisinsight:latest
+    ports:
+      - "5540:5540"
+    volumes:
+      - redisinsight-data:/data
+  
   minio:
-    container_name: minio
+    container_name: ${COMPOSE_PROJECT_NAME}-minio
     image: quay.io/minio/minio
     ports:
       - "9000:9000" # API

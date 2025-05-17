@@ -1,5 +1,6 @@
 using Package.Logger;
 using Package.OpenApi;
+using Package.Redis;
 using Package.Shared.Extensions;
 using Package.Shared.Mediator;
 using Service.Catalog;
@@ -11,6 +12,7 @@ services.AddHttpContextAccessor();
 services.AddCoreCors();
 services.AddOpenApi(typeof(Program).Assembly);
 services.AddCoreMediator(typeof(Program).Assembly);
+services.AddRedis();
 
 var app = builder.Build();
 app.UseCoreExceptionHandler();
