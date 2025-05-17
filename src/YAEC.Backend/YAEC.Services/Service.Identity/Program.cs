@@ -1,4 +1,5 @@
 using Package.Logger;
+using Package.MongoDb;
 using Package.OpenApi;
 using Package.Shared.Extensions;
 using Package.Shared.Mediator;
@@ -11,6 +12,7 @@ services.AddHttpContextAccessor();
 services.AddCoreCors();
 services.AddOpenApi(typeof(Program).Assembly);
 services.AddCoreMediator(typeof(Program).Assembly);
+services.AddMongoDb();
 
 var app = builder.Build();
 app.UseCoreExceptionHandler();

@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Package.OpenApi.MinimalApi;
 using Package.Shared.Mediator;
+using Service.Identity.Application.UserModule.Commands;
 
 namespace Service.Identity.Endpoints;
 
-internal class AuthEndpoints : IEndpoints
+public class AuthEndpoints : IEndpoints
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
@@ -18,20 +19,12 @@ internal class AuthEndpoints : IEndpoints
     private static void V1(RouteGroupBuilder group)
     {
         group.MapPost("/sign-up", async
-            ([FromServices] IMediator mediator) =>
-            {
-                await Task.CompletedTask;
-                return Results.Ok("OK");
-            })
+            ([FromServices] IMediator mediator, [FromBody] SignUpCommand command) => await mediator.SendAsync(command))
             .WithSummary("Register an account")
             .MapToApiVersion(1);
 
         group.MapPost("/sign-in", async
-            ([FromServices] IMediator mediator) =>
-            {
-                await Task.CompletedTask;
-                return Results.Ok("OK");
-            })
+            ([FromServices] IMediator mediator, [FromBody] SignInCommand command) => await mediator.SendAsync(command))
             .WithSummary("Login your account")
             .MapToApiVersion(1);
     }
