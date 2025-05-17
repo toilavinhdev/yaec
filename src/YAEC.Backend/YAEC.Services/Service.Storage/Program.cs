@@ -1,3 +1,4 @@
+using Package.FFmpeg;
 using Package.Logger;
 using Package.OpenApi;
 using Package.S3Manager;
@@ -17,5 +18,5 @@ app.UseCoreExceptionHandler();
 app.UseCors(CorsExtensions.AllowAll);
 app.UseOpenApi();
 app.MapGet("/", () => "Service.Storage");
-await app.InitializeS3BucketAsync();
+await app.InitializeFFmpeg();
 app.Run();
